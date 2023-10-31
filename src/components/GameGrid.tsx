@@ -7,9 +7,10 @@ import useGames from "../hooks/useGames";
 
 interface Props {
   gameQuery: GameQuery;
+  searchText: string;
 }
 
-const GameGrid = ({ gameQuery }: Props) => {
+const GameGrid = ({ gameQuery, searchText }: Props) => {
   const { data: games, error, isLoading } = useGames(gameQuery);
   const skeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 
@@ -24,7 +25,7 @@ const GameGrid = ({ gameQuery }: Props) => {
             </GameCardContainer>
           ))}
         {games.length === 0
-          ? "No Results Found"
+          ? `No Results Found for "${searchText}"`
           : games.map((game) => (
               <GameCardContainer key={game.id}>
                 <GameCard game={game} />
