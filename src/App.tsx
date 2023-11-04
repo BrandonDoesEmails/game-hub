@@ -10,32 +10,7 @@ import { Platform } from "./hooks/usePlatforms";
 import SortSelector from "./components/SortSelector";
 import GameHeading from "./components/GameHeading";
 
-export interface GameQuery {
-  genreId?: number;
-  platformId?: number;
-  sortOrder: string;
-  searchText: string;
-}
-
 const App = () => {
-  const [gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery);
-
-  const onSelectGenre = (genre: Genre) => {
-    setGameQuery({ ...gameQuery, genreId: genre.id });
-  };
-
-  const onSelectedPlatform = (platform: Platform) => {
-    setGameQuery({ ...gameQuery, platformId: platform.id });
-  };
-
-  const onSelectSortOrder = (sortOrder: string) => {
-    setGameQuery({ ...gameQuery, sortOrder });
-  };
-
-  const onSearch = (searchText: string) => {
-    setGameQuery({ ...gameQuery, searchText });
-  };
-
   return (
     <div className="App">
       <Grid
@@ -48,29 +23,20 @@ const App = () => {
           lg: "200px 1fr",
         }}>
         <GridItem area="nav">
-          <NavBar onSearch={onSearch} />
+          <NavBar />
         </GridItem>
         <Show above="lg">
           <GridItem area="aside" paddingX={5}>
-            <GenreList
-              onSelectGenre={onSelectGenre}
-              selectedGenreId={gameQuery.genreId}
-            />
+            <GenreList />
           </GridItem>
         </Show>
         <GridItem area="main" paddingX={10} paddingY={3}>
-          <GameHeading gameQuery={gameQuery} />
+          <GameHeading />
           <HStack spacing={5} marginBottom={5}>
-            <PlatformSelector
-              onSelectedPlatform={onSelectedPlatform}
-              selectedPlatformId={gameQuery.platformId}
-            />
-            <SortSelector
-              sortOrder={gameQuery.sortOrder}
-              onSelectSortOrder={onSelectSortOrder}
-            />
+            <PlatformSelector />
+            <SortSelector />
           </HStack>
-          <GameGrid gameQuery={gameQuery} searchText={gameQuery.searchText} />
+          <GameGrid />
         </GridItem>
       </Grid>
     </div>
