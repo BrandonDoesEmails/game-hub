@@ -40,7 +40,8 @@ const GenreList = () => {
                 variant="Link"
                 whiteSpace="normal"
                 textAlign="left"
-                fontWeight={genre.id === selectedGenreId ? "bold" : "normal"}>
+                fontWeight={genre.id === selectedGenreId ? "bold" : "normal"}
+                _hover={{ background: "gray.700" }}>
                 {genre.name}
               </Button>
             </HStack>
